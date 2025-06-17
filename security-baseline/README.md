@@ -1,12 +1,37 @@
+# AWS Security Baseline Terraform Module
+
+This Terraform module sets up key AWS security services in each account and region:
+
+- **AWS CloudTrail** (multi-region)
+- **AWS Config**
+- **Amazon GuardDuty**
+- **AWS Security Hub** (with CIS AWS Foundations Benchmark)
+
+Supports centralized logging to shared S3 buckets in a security/logging account.
+
+---
+
+## 🔐 Prerequisites
+
+### 1. Centralized Logging S3 Buckets
+
+Create two S3 buckets in your **security/logging account**:
+
+- CloudTrail bucket: `my-org-cloudtrail-logs`
+- AWS Config bucket: `my-org-config-logs`
+
+Add the following bucket policies to allow logging from other accounts:
+
+#### 📘 Example CloudTrail Bucket Policy
+
+```json
 {
   "Version": "2012-10-17",
   "Statement": [
     {
-      "Sid": "Allow CloudTrail from other accounts",
+      "Sid": "AllowCloudTrailWrite",
       "Effect": "Allow",
-      "Principal": {
-        "Service": "cloudtrail.amazonaws.com"
-      },
+      "Principal": { "Service": "cloudtrail.amazonaws.com" },
       "Action": "s3:PutObject",
       "Resource": "arn:aws:s3:::my-org-cloudtrail-logs/AWSLogs/*",
       "Condition": {
@@ -16,16 +41,15 @@
       }
     },
     {
-      "Sid": "Allow bucket listing",
+      "Sid": "AllowCloudTrailACL",
       "Effect": "Allow",
-      "Principal": {
-        "Service": "cloudtrail.amazonaws.com"
-      },
+      "Principal": { "Service": "cloudtrail.amazonaws.com" },
       "Action": "s3:GetBucketAcl",
       "Resource": "arn:aws:s3:::my-org-cloudtrail-logs"
     }
   ]
 }
+
 
 #### 📘 Config Bucket Policy
 ```json
