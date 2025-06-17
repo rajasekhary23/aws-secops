@@ -49,7 +49,7 @@ Add the following bucket policies to allow logging from other accounts:
     }
   ]
 }
-
+```
 
 #### 📘 Config Bucket Policy
 ```json
@@ -81,7 +81,7 @@ Add the following bucket policies to allow logging from other accounts:
     }
   ]
 }
-
+```
 ### 2. IAM Role for AWS Config
 In each account, create an IAM role (e.g., aws-config-role) with:
 
@@ -110,12 +110,14 @@ module "security_baseline" {
   config_s3_bucket     = "my-org-config-logs"
   config_role_arn      = "arn:aws:iam::123456789012:role/aws-config-role"
 }
+```
 
 Then deploy with:
 ```bash
 terraform init
 terraform plan
 terraform apply
+```
 
 ## 📝 Notes
 You can extend this module to include centralized GuardDuty and Security Hub administrators.
@@ -136,3 +138,4 @@ security-baseline/
         ├── main.tf
         ├── variables.tf
         └── outputs.tf
+```
