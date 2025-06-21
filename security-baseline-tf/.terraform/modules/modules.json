@@ -1,1 +1,1 @@
-{"Modules":[{"Key":"","Source":"","Dir":"."},{"Key":"security_baseline","Source":"./modules/security_baseline","Dir":"modules/security_baseline"}]}
+{"Modules":[{"Key":"","Source":"","Dir":"."},{"Key":"cloudtrail_s3_bucket","Source":"./modules/s3","Dir":"modules/s3"},{"Key":"config_s3_bucket","Source":"./modules/s3","Dir":"modules/s3"},{"Key":"security_baseline","Source":"./modules/security_baseline","Dir":"modules/security_baseline"}]}

@@ -4,17 +4,17 @@ provider "aws" {
 
 # CloudTrail
 resource "aws_cloudtrail" "main" {
-  name                          = "org-trail"
+  name                          = "${split("-",var.cloudtrail_s3_bucket)[0]}-trail" #"org-trail" 
   s3_bucket_name                = var.cloudtrail_s3_bucket
   include_global_service_events = true
   is_multi_region_trail         = true
   enable_log_file_validation    = true
-  enable_logging = true
+  enable_logging                = true
 }
 
 # AWS Config
 resource "aws_config_configuration_recorder" "main" {
-  name     = "default"
+  name     = "${split("-",var.config_s3_bucket)[0]}-config"
   role_arn = var.config_role_arn
   recording_group {
     all_supported = true
@@ -23,7 +23,7 @@ resource "aws_config_configuration_recorder" "main" {
 }
 
 resource "aws_config_delivery_channel" "main" {
-  name           = "default"
+  name           = aws_config_configuration_recorder.main.name
   s3_bucket_name = var.config_s3_bucket
   depends_on     = [aws_config_configuration_recorder.main]
 }
