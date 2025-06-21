@@ -9,7 +9,7 @@ resource "aws_cloudtrail" "main" {
   include_global_service_events = true
   is_multi_region_trail         = true
   enable_log_file_validation    = true
-  is_logging                    = true
+  enable_logging = true
 }
 
 # AWS Config
@@ -43,6 +43,6 @@ resource "aws_guardduty_detector" "main" {
 resource "aws_securityhub_account" "main" {}
 
 resource "aws_securityhub_standards_subscription" "cis" {
-  standards_arn = "arn:aws:securityhub:::standards/cis-aws-foundations-benchmark/v/1.2.0"
+  standards_arn = "arn:aws:securityhub:us-east-1::standards/cis-aws-foundations-benchmark/v/1.4.0"
   depends_on    = [aws_securityhub_account.main]
 }
