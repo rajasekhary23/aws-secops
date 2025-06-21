@@ -8,6 +8,12 @@ This Terraform module sets up key AWS security services in each account and regi
 - **AWS Security Hub** (with CIS AWS Foundations Benchmark)
 
 Supports centralized logging to shared S3 buckets in a security/logging account.
+Use below command to check available CIS standards
+```bash
+aws securityhub enable-security-hub --region us-east-1
+
+aws securityhub describe-standards
+```
 
 ---
 

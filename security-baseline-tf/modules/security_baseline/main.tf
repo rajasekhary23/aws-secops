@@ -43,6 +43,9 @@ resource "aws_guardduty_detector" "main" {
 resource "aws_securityhub_account" "main" {}
 
 resource "aws_securityhub_standards_subscription" "cis" {
+  #Use below command to check available CIS standards
+  # aws securityhub enable-security-hub --region us-east-1
+  # aws securityhub describe-standards
   standards_arn = "arn:aws:securityhub:us-east-1::standards/cis-aws-foundations-benchmark/v/1.4.0"
   depends_on    = [aws_securityhub_account.main]
 }
