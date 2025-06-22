@@ -3,6 +3,11 @@ variable "region" {
   type        = string
 }
 
+variable "kms_key_id" {
+  description = "kms key id"
+  type = string
+}
+
 variable "cloudtrail_s3_bucket" {
   description = "S3 bucket name for CloudTrail"
   type        = string

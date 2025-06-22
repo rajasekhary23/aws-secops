@@ -1,6 +1,6 @@
 # Local .terraform directories
 **/.terraform/providers/*
-
+*exe
 # .tfstate files
 *.tfstate
 *.tfstate.*

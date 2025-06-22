@@ -2,6 +2,17 @@ provider "aws" {
   region = var.region
 }
 
+# resource "aws_kms_key" "cloudtrail_kms_key" {
+#   description         = "KMS key for cloudtrail bucket encryption"
+#   deletion_window_in_days = 10
+#   enable_key_rotation     = true
+#   policy = var.kms_policy
+
+#   tags = {
+#     Name = "cloudtrail-encryption-key"
+#   }
+# }
+
 # CloudTrail
 resource "aws_cloudtrail" "main" {
   name                          = "${split("-",var.cloudtrail_s3_bucket)[0]}-trail" #"org-trail" 
@@ -10,6 +21,10 @@ resource "aws_cloudtrail" "main" {
   is_multi_region_trail         = true
   enable_log_file_validation    = true
   enable_logging                = true
+  kms_key_id = var.kms_key_id
+  tags = {
+    Name = "yrs-cloud-trail"
+  }
 }
 
 # AWS Config
@@ -37,6 +52,9 @@ resource "aws_config_configuration_recorder_status" "main" {
 # GuardDuty
 resource "aws_guardduty_detector" "main" {
   enable = true
+  tags = {
+    Name = "guardduty-detector"
+  }
 }
 
 # Security Hub

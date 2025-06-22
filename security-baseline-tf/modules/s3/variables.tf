@@ -1,3 +1,13 @@
+variable "region" {
+  description = "AWS region"
+  type = string
+}
+
+variable "kms_key_id" {
+  description = "kms key id"
+  type = string
+}
+
 variable "bucket_name" {
   description = "S3 bucket name"
   type        = string
